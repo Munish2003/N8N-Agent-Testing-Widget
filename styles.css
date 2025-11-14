@@ -186,7 +186,7 @@
 
 .chat-messages {
     flex: 1;
-    padding: 25px;
+    padding: 0 25px 25px 25px;
     overflow-y: auto;
     background: #f9f9f9;
     min-height: 0;
@@ -195,12 +195,14 @@
     animation: fadeInUp 0.5s ease 0.2s both;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    /* Remove position: relative */
 }
 
-
-
+/* Messages wrapper to push content to bottom */
+.chat-messages::before {
+    content: '';
+    flex: 1;
+    min-height: 0;
+}
 
 @keyframes fadeInUp {
     from {
@@ -239,6 +241,7 @@
     opacity: 0;
     transform: translateY(10px);
     animation: messageSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    flex-shrink: 0;
 }
 
 @keyframes messageSlideIn {
@@ -421,7 +424,6 @@
     transform: none;
 }
 
-
 /* FULLSCREEN TABLET (768px to 1023px) */
 @media (max-width: 1023px) and (min-width: 768px) {
     .chatbot-widget-left {
@@ -470,10 +472,8 @@
     }
     
     .chat-messages {
-    padding: 24px 20px;
-    justify-content: flex-end; /* Add this */
-}
-
+        padding: 0 20px 24px 20px;
+    }
     
     .message-content {
         max-width: 75%;
@@ -561,11 +561,8 @@
     }
     
     .chat-messages {
-    padding: 20px 16px;
-    padding-bottom: 10px;
-    justify-content: flex-end; /* Add this */
-}
-
+        padding: 0 16px 20px 16px;
+    }
     
     .message-content {
         max-width: 80%;
@@ -610,11 +607,9 @@
         font-size: 16px;
     }
     
-   .chat-messages {
-    padding: 16px 12px;
-    justify-content: flex-end; /* Add this */
-}
-
+    .chat-messages {
+        padding: 0 12px 16px 12px;
+    }
     
     .message-content {
         max-width: 82%;
