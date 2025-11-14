@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -445,3 +452,92 @@ document.getElementById('chatToggleBtnLeft').addEventListener('click', function(
 // Call when new message is added
 // Add this after appending new message to DOM
 scrollToBottom();
+// ====================================
+// ROTATING ATTENTION BADGE SCRIPT
+// ====================================
+
+// Rotating messages array
+const attentionMessages = [
+    { emoji: "💬", text: "Hey! Need help with admissions or figuring out your next step? I got you!" },
+    { emoji: "😕", text: "Feeling confused about what to do after graduation? Let's talk it out." },
+    { emoji: "🎯", text: "Not sure which course fits you best? I can help you choose." },
+    { emoji: "📝", text: "Stuck with forms, deadlines, or options? Just ask—I'm here to help!" },
+    { emoji: "🛤️", text: "Trying to decide your future path? Let's explore your choices together." },
+    { emoji: "❓", text: "Got questions about college life, courses, or careers? I'm all ears!" },
+    { emoji: "🤝", text: "If admissions feel overwhelming, don't worry—I can walk you through it." },
+    { emoji: "💡", text: "Don't know where to start? Tell me what's on your mind!" },
+    { emoji: "🧭", text: "Need some guidance? Whether it's courses, careers, or campus info, I'm here!" },
+    { emoji: "🌟", text: "Feeling lost? I can help you figure out what's next." }
+];
+
+let currentBadgeIndex = 0;
+let badgeRotationInterval;
+let isBadgeActive = true;
+
+// Get badge elements
+const badgeElement = document.getElementById('attentionBadge');
+const badgeTextElement = document.getElementById('badgeText');
+const toggleButton = document.getElementById('chatToggleBtnLeft');
+
+// Function to show next message with animation
+function displayNextBadgeMessage() {
+    if (!isBadgeActive) return;
+    
+    // Hide current message (collapse animation)
+    badgeElement.classList.remove('show');
+    badgeElement.classList.add('hide');
+    
+    setTimeout(() => {
+        // Update to next message
+        currentBadgeIndex = (currentBadgeIndex + 1) % attentionMessages.length;
+        const nextMessage = attentionMessages[currentBadgeIndex];
+        
+        // Update emoji and text content
+        badgeElement.querySelector('.emoji').textContent = nextMessage.emoji;
+        badgeTextElement.textContent = nextMessage.text;
+        
+        // Show new message (expand animation)
+        badgeElement.classList.remove('hide');
+        badgeElement.classList.add('show');
+    }, 400); // Wait for collapse animation to complete
+}
+
+// Initialize badge with delay
+setTimeout(() => {
+    if (isBadgeActive) {
+        // Show first message
+        badgeElement.classList.add('show');
+        
+        // Start rotating messages every 5 seconds
+        badgeRotationInterval = setInterval(displayNextBadgeMessage, 5000);
+    }
+}, 1000);
+
+// Hide badge when chat button is clicked
+if (toggleButton) {
+    toggleButton.addEventListener('click', function() {
+        // Stop badge rotation
+        isBadgeActive = false;
+        clearInterval(badgeRotationInterval);
+        
+        // Hide badge with collapse animation
+        badgeElement.classList.remove('show');
+        badgeElement.classList.add('hide');
+        
+        // Remove from DOM after animation
+        setTimeout(() => {
+            badgeElement.style.display = 'none';
+        }, 400);
+    });
+}
+
+// ====================================
+// YOUR EXISTING CHAT WIDGET CODE BELOW
+// ====================================
+
+// Now you can use your original variable names without conflicts:
+// const chatToggleBtnLeft = document.getElementById('chatToggleBtnLeft');
+// const chatWindowLeft = document.getElementById('chatWindowLeft');
+// const minimizeBtnLeft = document.getElementById('minimizeBtnLeft');
+
+// ... rest of your existing chat functionality ...
