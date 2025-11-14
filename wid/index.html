@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IMT Chatbot Widget</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- LEFT CHATBOT WIDGET -->
+    <div class="chatbot-widget-left">
+        <button class="chat-toggle-btn-left" id="chatToggleBtnLeft">
+            <svg class="chat-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12 2C6.48 2 2 6.48 2 12c0 1.54.36 3 .97 4.29L2 22l5.71-.97C9 21.64 10.46 22 12 22c5.52 0 10-4.48 10-10S17.52 2 12 2zm0 18c-1.38 0-2.68-.31-3.86-.85l-.28-.14-2.9.49.49-2.9-.14-.28C4.31 14.68 4 13.38 4 12c0-4.41 3.59-8 8-8s8 3.59 8 8-3.59 8-8 8z"/>
+            </svg>
+            <span class="close-icon">×</span>
+        </button>
+
+        <div class="chat-window-left" id="chatWindowLeft">
+            <div class="chat-header">
+                <div class="chat-header-info">
+                    <h3>IMT Support</h3>
+                    <span class="chat-status">● Online</span>
+                </div>
+                <button class="minimize-btn" id="minimizeBtnLeft">−</button>
+            </div>
+            
+            <div class="chat-messages" id="chatMessagesLeft">
+                <div class="message bot">
+                    <div class="message-avatar">🎓</div>
+                    <div class="message-content">
+                        <p>Hello! Welcome to IMT Nagpur. 👋</p>
+                        <p>How can I assist you today with admissions, programs, or campus information?</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="typing-indicator" id="typingIndicatorLeft">
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+                <div class="typing-dot"></div>
+            </div>
+
+            <div class="chat-input-container">
+                <input 
+                    type="text" 
+                    class="chat-input" 
+                    id="chatInputLeft" 
+                    placeholder="Type your message..." 
+                    autocomplete="off"
+                >
+                <button class="send-button" id="sendButtonLeft">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="white">
+                        <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
