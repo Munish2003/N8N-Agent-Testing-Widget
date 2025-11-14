@@ -1,6 +1,4 @@
 
-
-
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
@@ -54,6 +52,7 @@ function cleanN8NResponse(rawText) {
 }
 
 // Typewriter effect function
+// Typewriter effect function
 async function typewriterEffect(element, text, speed = 20) {
     return new Promise((resolve) => {
         // (Use the clean function here too, just in case)
@@ -63,11 +62,11 @@ async function typewriterEffect(element, text, speed = 20) {
         
         if (paragraphs.length === 0) {
              // Handle cases where the text might *only* be JSON
-            const p = document.createElement('p');
-            p.textContent = "Received a response."; // Fallback
-            element.appendChild(p);
-            resolve();
-            return;
+             const p = document.createElement('p');
+             p.textContent = "Received a response."; // Fallback
+             element.appendChild(p);
+             resolve();
+             return;
         }
 
         let currentP = document.createElement('p');
@@ -76,6 +75,9 @@ async function typewriterEffect(element, text, speed = 20) {
         let paragraphIndex = 0;
         let charIndex = 0;
         
+        // Find the chat messages container ONCE
+        const chatMessages = element.closest('.chat-messages');
+
         function type() {
             if (paragraphIndex < paragraphs.length) {
                 const currentText = paragraphs[paragraphIndex];
@@ -84,11 +86,20 @@ async function typewriterEffect(element, text, speed = 20) {
                     currentP.textContent += currentText.charAt(charIndex);
                     charIndex++;
                     
-                    // Auto-scroll to bottom
-                    const chatMessages = element.closest('.chat-messages');
+                    // =============================================
+                    // === 👇 THIS IS THE MODIFIED SCROLL LOGIC 👇 ===
+                    // =============================================
                     if (chatMessages) {
-                        chatMessages.scrollTop = chatMessages.scrollHeight;
+                        // Check if user is scrolled to the bottom (or very close)
+                        // We add a 10px buffer for flexibility
+                        const isScrolledToBottom = chatMessages.scrollHeight - chatMessages.clientHeight <= chatMessages.scrollTop + 10;
+
+                        if (isScrolledToBottom) {
+                            // Only auto-scroll if the user is already at the bottom
+                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                        }
                     }
+                    // =============================================
                     
                     setTimeout(type, speed);
                 } else {
