@@ -193,7 +193,13 @@
     -webkit-overflow-scrolling: touch;
     opacity: 0;
     animation: fadeInUp 0.5s ease 0.2s both;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end; /* Add this - pushes content to bottom */
 }
+
+
+
 
 @keyframes fadeInUp {
     from {
@@ -462,8 +468,10 @@
     }
     
     .chat-messages {
-        padding: 24px 20px;
-    }
+    padding: 24px 20px;
+    justify-content: flex-end; /* Add this */
+}
+
     
     .message-content {
         max-width: 75%;
@@ -551,9 +559,11 @@
     }
     
     .chat-messages {
-        padding: 20px 16px;
-        padding-bottom: 10px;
-    }
+    padding: 20px 16px;
+    padding-bottom: 10px;
+    justify-content: flex-end; /* Add this */
+}
+
     
     .message-content {
         max-width: 80%;
@@ -598,9 +608,11 @@
         font-size: 16px;
     }
     
-    .chat-messages {
-        padding: 16px 12px;
-    }
+   .chat-messages {
+    padding: 16px 12px;
+    justify-content: flex-end; /* Add this */
+}
+
     
     .message-content {
         max-width: 82%;
