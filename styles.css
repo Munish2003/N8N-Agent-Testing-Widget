@@ -195,7 +195,8 @@
     animation: fadeInUp 0.5s ease 0.2s both;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end; /* Add this - pushes content to bottom */
+    justify-content: flex-end;
+    /* Remove position: relative */
 }
 
 
@@ -419,6 +420,7 @@
     cursor: not-allowed;
     transform: none;
 }
+
 
 /* FULLSCREEN TABLET (768px to 1023px) */
 @media (max-width: 1023px) and (min-width: 768px) {
