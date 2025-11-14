@@ -660,3 +660,190 @@
 .message.new {
     animation: messageSlideIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), pulse 0.6s ease 0.4s;
 }
+
+/* ============================ */
+/* ROTATING ATTENTION MESSAGE BADGE - FIXED ALIGNMENT */
+/* ============================ */
+
+.chat-attention-badge {
+    position: absolute;
+    bottom: 75px;
+    left: 5px;
+    background: white;
+    color: #1a237e;
+    padding: 0;
+    border-radius: 18px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    font-size: 12px;
+    font-weight: 500;
+    width: 0;
+    max-width: 420px;
+    opacity: 0;
+    overflow: hidden;
+    z-index: 10000;
+    line-height: 1.5;
+    transform-origin: left center;
+    display: flex;
+    align-items: center;
+}
+
+.chat-attention-badge-content {
+    display: flex;
+    align-items: center; /* Changed from flex-start to center */
+    gap: 8px;
+    padding: 12px 32px 12px 16px;
+    width: 100%;
+    min-width: 420px;
+}
+
+.chat-attention-badge::before {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 20px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-top: 8px solid white;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.chat-attention-badge.show::before {
+    opacity: 1;
+}
+
+.chat-attention-badge.show {
+    animation: expandMessage 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.chat-attention-badge.hide {
+    animation: collapseMessage 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55) forwards;
+}
+
+@keyframes expandMessage {
+    0% {
+        width: 0;
+        opacity: 0;
+    }
+    1% {
+        opacity: 1;
+    }
+    100% {
+        width: 420px;
+        opacity: 1;
+    }
+}
+
+@keyframes collapseMessage {
+    0% {
+        width: 420px;
+        opacity: 1;
+    }
+    99% {
+        opacity: 1;
+    }
+    100% {
+        width: 0;
+        opacity: 0;
+    }
+}
+
+/* Emoji styling */
+.chat-attention-badge .emoji {
+    font-size: 18px;
+    display: inline-block;
+    flex-shrink: 0;
+    line-height: 1; /* Added for better alignment */
+}
+
+/* Text styling */
+.chat-attention-badge #badgeText {
+    flex: 1;
+    word-wrap: break-word;
+    white-space: normal;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    padding-right: 6px;
+    max-width: 360px;
+    line-height: 1.5; /* Consistent line height */
+}
+
+/* Mobile adjustments */
+@media (max-width: 767px) {
+    .chat-attention-badge {
+        max-width: 320px;
+        font-size: 11px;
+        bottom: 70px;
+    }
+    
+    .chat-attention-badge-content {
+        padding: 10px 26px 10px 14px;
+        min-width: 320px;
+    }
+    
+    .chat-attention-badge .emoji {
+        font-size: 16px;
+    }
+    
+    .chat-attention-badge #badgeText {
+        max-width: 270px;
+    }
+    
+    @keyframes expandMessage {
+        0% {
+            width: 0;
+            opacity: 0;
+        }
+        1% {
+            opacity: 1;
+        }
+        100% {
+            width: 320px;
+            opacity: 1;
+        }
+    }
+    
+    @keyframes collapseMessage {
+        0% {
+            width: 320px;
+            opacity: 1;
+        }
+        99% {
+            opacity: 1;
+        }
+        100% {
+            width: 0;
+            opacity: 0;
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    .chat-attention-badge {
+        max-width: 300px;
+        font-size: 10.5px;
+    }
+    
+    .chat-attention-badge-content {
+        padding: 9px 24px 9px 12px;
+        min-width: 300px;
+    }
+    
+    .chat-attention-badge #badgeText {
+        max-width: 250px;
+    }
+    
+    @keyframes expandMessage {
+        100% {
+            width: 300px;
+        }
+    }
+    
+    @keyframes collapseMessage {
+        0% {
+            width: 300px;
+        }
+    }
+}
